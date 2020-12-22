@@ -37,6 +37,7 @@ def main():
     states = []
     cons = []
     tmp_str = []
+    ok_str = []
     result = subprocess.check_output(["/usr/sbin/asterisk -rx 'pjsip show contacts'| awk '{print $2, $4, $5}'"], shell=True).decode("utf-8").splitlines()
     #result = subprocess.check_output(['/usr/bin/cat','asterisk_tmp.dump']).decode("utf-8").splitlines()
     
@@ -56,8 +57,11 @@ def main():
         if state != "Avail":
             states.append(CRITICAL)
             tmp_str.append('Contact {0} - {1} \n'.format(name, state))
+        else:
+            ok_str.append('Contact {0} - {1} ms'.format(name, latency))
 
     tmp_str = '\n'.join(tmp_str)
+    ok_str = '\n'.join(ok_str)
 
     # check states
     if CRITICAL in states:
@@ -67,7 +71,7 @@ def main():
         print('WARNING - ' + tmp_str)
         sys.exit(WARNING)
     if (CRITICAL or WARNING) not in states:
-        print('OK - ' + tmp_str)
+        print('OK - ' + ok_str)
         sys.exit(OK)
 
 
