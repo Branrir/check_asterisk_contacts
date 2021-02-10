@@ -42,7 +42,6 @@ def main():
     
     # populate exclude list
     exclude = args['exclude']
-    print(exclude)
         
     # parse lines
     for line in result:
