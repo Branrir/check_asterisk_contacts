@@ -39,7 +39,6 @@ def main():
     tmp_str = []
     ok_str = []
     result = subprocess.check_output(["/usr/sbin/asterisk -rx 'pjsip show contacts'| awk '{print $2, $4, $5}'"], shell=True).decode("utf-8").splitlines()
-    #result = subprocess.check_output(['/usr/bin/cat','asterisk_tmp.dump']).decode("utf-8").splitlines()
     
     
     # parse lines
