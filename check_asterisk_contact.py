@@ -42,7 +42,7 @@ def main():
     
     # populate exclude list
     exclude = args['exclude']
-    print(len(exclude))
+    print(exclude)
         
     # parse lines
     for line in result:
@@ -56,16 +56,9 @@ def main():
         state = con.get_state()
         name = con.get_name()
         latency = con.get_latecy()
-        if state != "Avail":
-            if len(exclude) == 0:
-                if state not in exclude:
-                    states.append(CRITICAL)
-                    tmp_str.append('Contact {0} - {1} \n'.format(name, state))
-                else:
-                    ok_str.append('Contact {0} - {1} ms'.format(name, latency))
-            else:
-                states.append(CRITICAL)
-                tmp_str.append('Contact {0} - {1} \n'.format(name, state))
+        if state != "Avail" and state not in exclude:
+            states.append(CRITICAL)
+            tmp_str.append('Contact {0} - {1} \n'.format(name, state))
         else:
             ok_str.append('Contact {0} - {1} ms'.format(name, latency))
 
@@ -84,14 +77,8 @@ def main():
         sys.exit(OK)
 
 
-
-
-    
-
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-x', '--exclude', help='Exclude sip contact',type=list, action='append', default=[])
+    parser.add_argument('-x', '--exclude', help='Exclude sip contact', action='append', default=[])
     args = vars(parser.parse_args())
     main()
