@@ -8,7 +8,7 @@ This script checks if any of contact not Available are.
 Run following on remote server:
 ```bash
 cd /usr/lib/nagios/plugins
-wget https://raw.githubusercontent.com/Branrir/check_proxmox_backup/master/check_proxmox_backup.py
+wget https://raw.githubusercontent.com/Branrir/check_asterisk_contacts/master/check_asterisk_contacts.py
 chmod +x check_proxmox_backup.py
 ```
 
