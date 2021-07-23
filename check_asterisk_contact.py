@@ -55,7 +55,7 @@ def main():
         state = con.get_state()
         name = con.get_name()
         latency = con.get_latecy()
-        if state != "Avail" and state not in exclude:
+        if state != "Avail" and name not in exclude:
             states.append(CRITICAL)
             tmp_str.append('Contact {0} - {1} \n'.format(name, state))
         else:
